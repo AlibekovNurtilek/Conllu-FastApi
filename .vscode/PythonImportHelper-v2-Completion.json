@@ -1,0 +1,509 @@
+[
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Depends",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Query",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncSession",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "create_async_engine",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "async_sessionmaker",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncSession",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "create_async_engine",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "async_sessionmaker",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "select",
+        "importPath": "sqlalchemy.future",
+        "description": "sqlalchemy.future",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.future",
+        "documentation": {}
+    },
+    {
+        "label": "selectinload",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "declarative_base",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "relationship",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "declarative_base",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Sentence",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Sentence",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "new_session",
+        "importPath": "app.database",
+        "description": "app.database",
+        "isExtraImport": true,
+        "detail": "app.database",
+        "documentation": {}
+    },
+    {
+        "label": "create_tables",
+        "importPath": "app.database",
+        "description": "app.database",
+        "isExtraImport": true,
+        "detail": "app.database",
+        "documentation": {}
+    },
+    {
+        "label": "delete_tables",
+        "importPath": "app.database",
+        "description": "app.database",
+        "isExtraImport": true,
+        "detail": "app.database",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "importPath": "app.database",
+        "description": "app.database",
+        "isExtraImport": true,
+        "detail": "app.database",
+        "documentation": {}
+    },
+    {
+        "label": "PaginatedResponse",
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "isExtraImport": true,
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceWithTokens",
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "isExtraImport": true,
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceUpdate",
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "isExtraImport": true,
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "TokenUpdate",
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "isExtraImport": true,
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceCreate",
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "isExtraImport": true,
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceResponse",
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "isExtraImport": true,
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "asynccontextmanager",
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "isExtraImport": true,
+        "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "start_import_data",
+        "importPath": "import_data",
+        "description": "import_data",
+        "isExtraImport": true,
+        "detail": "import_data",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "app.routers.sentences",
+        "description": "app.routers.sentences",
+        "isExtraImport": true,
+        "detail": "app.routers.sentences",
+        "documentation": {}
+    },
+    {
+        "label": "Column",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Integer",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "String",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "ForeignKey",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "JSON",
+        "importPath": "sqlalchemy.types",
+        "description": "sqlalchemy.types",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.types",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "parse",
+        "importPath": "conllu",
+        "description": "conllu",
+        "isExtraImport": true,
+        "detail": "conllu",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "app.routers.sentences",
+        "description": "app.routers.sentences",
+        "peekOfCode": "router = APIRouter()\nasync def get_paginated_sentences(page: int = 1, size: int = 10):\n    # Считаем общее количество предложений\n    async with new_session() as session:\n        result = await session.execute(select(Sentence))\n        sentences = result.scalars().all()  # Получаем все предложения\n        total_sentences = len(sentences)  # Используем len() для подсчета количества\n        # Вычисляем количество страниц\n        pages = (total_sentences + size - 1) // size\n        # Проверяем корректность страницы",
+        "detail": "app.routers.sentences",
+        "documentation": {}
+    },
+    {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "app.database",
+        "description": "app.database",
+        "peekOfCode": "engine = create_async_engine(\"sqlite+aiosqlite:///data/database.db\", echo=True)\nnew_session = async_sessionmaker(engine, expire_on_commit=False)\n# Создаем Base для наследования в моделях\nBase = declarative_base()\n# Избегаем циклического импорта\nasync def create_tables():\n    from app.models import Sentence, Token  # Импортируем модели здесь, чтобы избежать цикличности\n    async with engine.begin() as conn:\n        # Создаем все таблицы, зарегистрированные в Base\n        await conn.run_sync(Base.metadata.create_all)",
+        "detail": "app.database",
+        "documentation": {}
+    },
+    {
+        "label": "new_session",
+        "kind": 5,
+        "importPath": "app.database",
+        "description": "app.database",
+        "peekOfCode": "new_session = async_sessionmaker(engine, expire_on_commit=False)\n# Создаем Base для наследования в моделях\nBase = declarative_base()\n# Избегаем циклического импорта\nasync def create_tables():\n    from app.models import Sentence, Token  # Импортируем модели здесь, чтобы избежать цикличности\n    async with engine.begin() as conn:\n        # Создаем все таблицы, зарегистрированные в Base\n        await conn.run_sync(Base.metadata.create_all)\nasync def delete_tables():",
+        "detail": "app.database",
+        "documentation": {}
+    },
+    {
+        "label": "Base",
+        "kind": 5,
+        "importPath": "app.database",
+        "description": "app.database",
+        "peekOfCode": "Base = declarative_base()\n# Избегаем циклического импорта\nasync def create_tables():\n    from app.models import Sentence, Token  # Импортируем модели здесь, чтобы избежать цикличности\n    async with engine.begin() as conn:\n        # Создаем все таблицы, зарегистрированные в Base\n        await conn.run_sync(Base.metadata.create_all)\nasync def delete_tables():\n    async with engine.begin() as conn:\n        # Удаляем все таблицы",
+        "detail": "app.database",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "app = FastAPI(lifespan=lifespan)\napp.include_router(sentence_router)",
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
+        "label": "Sentence",
+        "kind": 6,
+        "importPath": "app.models",
+        "description": "app.models",
+        "peekOfCode": "class Sentence(Base):\n    __tablename__ = 'sentences'\n    id = Column(Integer, primary_key=True, index=True)\n    text = Column(String, index=True)  # Текст предложения\n    is_corrected = Column(Integer, default=0)  # 0 - не исправлено, 1 - исправлено\n    tokens = relationship(\"Token\", back_populates=\"sentence\")\nclass Token(Base):\n    __tablename__ = 'tokens'\n    id = Column(Integer, primary_key=True, index=True)\n    form = Column(String, index=True)  # Форма токена (например, слово)",
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "kind": 6,
+        "importPath": "app.models",
+        "description": "app.models",
+        "peekOfCode": "class Token(Base):\n    __tablename__ = 'tokens'\n    id = Column(Integer, primary_key=True, index=True)\n    form = Column(String, index=True)  # Форма токена (например, слово)\n    lemma = Column(String)  # Лемма токена\n    pos = Column(String)  # Часть речи\n    xpos = Column(String)  # Точная часть речи\n    feats = Column(JSON)  # Характеристики токена (например, морфологические признаки)\n    head = Column(Integer, ForeignKey(\"tokens.id\"))  # Ссылка на головной токен (ID)\n    deprel = Column(String)  # Тип зависимости",
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceResponse",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class SentenceResponse(BaseModel):\n    id: int\n    text: str\n    is_corrected: int\n    class Config:\n        orm_mode = True\nclass PaginatedResponse(BaseModel):\n    total: int\n    pages: int\n    page: int",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "PaginatedResponse",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class PaginatedResponse(BaseModel):\n    total: int\n    pages: int\n    page: int\n    size: int\n    items: List[SentenceResponse]\n#для получания предложения с токенами\nclass TokenBase(BaseModel):\n    id: int\n    form: str",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "TokenBase",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class TokenBase(BaseModel):\n    id: int\n    form: str\n    lemma: Optional[str] = None\n    pos: Optional[str] = None\n    xpos: Optional[str] = None\n    feats: Optional[dict] = None\n    head: Optional[int] = None\n    deprel: Optional[str] = None\n    misc: Optional[str] = None",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceWithTokens",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class SentenceWithTokens(BaseModel):\n    id: int\n    text: str\n    is_corrected: int\n    tokens: List[TokenBase]\n    class Config:\n        orm_mode = True\nclass TokenUpdate(BaseModel):\n    id: int\n    form: Optional[str]",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "TokenUpdate",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class TokenUpdate(BaseModel):\n    id: int\n    form: Optional[str]\n    lemma: Optional[str]\n    pos: Optional[str]\n    xpos: Optional[str]\n    feats: Optional[dict]\n    head: Optional[int]\n    deprel: Optional[str]\n    misc: Optional[str]",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceUpdate",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class SentenceUpdate(BaseModel):\n    text: Optional[str]\n#для создание\nclass TokenCreate(BaseModel):\n    form: str\n    lemma: str\n    pos: str\n    xpos: str\n    feats: Optional[dict] = None\n    head: int",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "TokenCreate",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class TokenCreate(BaseModel):\n    form: str\n    lemma: str\n    pos: str\n    xpos: str\n    feats: Optional[dict] = None\n    head: int\n    deprel: str\n    misc: Optional[str] = None\nclass SentenceCreate(BaseModel):",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceCreate",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class SentenceCreate(BaseModel):\n    text: str\n    is_corrected: int\n    tokens: List[TokenCreate]\nclass SentenceResponse(BaseModel):\n    id: int\n    text: str\n    class Config:\n        orm_mode = True",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceResponse",
+        "kind": 6,
+        "importPath": "app.schemas",
+        "description": "app.schemas",
+        "peekOfCode": "class SentenceResponse(BaseModel):\n    id: int\n    text: str\n    class Config:\n        orm_mode = True",
+        "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "import_data",
+        "description": "import_data",
+        "peekOfCode": "engine = create_async_engine(\"sqlite+aiosqlite:///data/database.db\", echo=False)\nnew_session = async_sessionmaker(engine, expire_on_commit=False)\nasync def load_conllu_to_db(file_path: str, session: AsyncSession):\n    with open(file_path, \"r\", encoding=\"utf-8\") as f:\n        data = f.read()\n    sentences = parse(data)\n    for sent in sentences:\n        sentence_text = \" \".join([token[\"form\"] for token in sent])\n        db_sentence = Sentence(text=sentence_text, is_corrected=0)\n        session.add(db_sentence)",
+        "detail": "import_data",
+        "documentation": {}
+    },
+    {
+        "label": "new_session",
+        "kind": 5,
+        "importPath": "import_data",
+        "description": "import_data",
+        "peekOfCode": "new_session = async_sessionmaker(engine, expire_on_commit=False)\nasync def load_conllu_to_db(file_path: str, session: AsyncSession):\n    with open(file_path, \"r\", encoding=\"utf-8\") as f:\n        data = f.read()\n    sentences = parse(data)\n    for sent in sentences:\n        sentence_text = \" \".join([token[\"form\"] for token in sent])\n        db_sentence = Sentence(text=sentence_text, is_corrected=0)\n        session.add(db_sentence)\n        await session.flush()  # Получаем ID для предложения",
+        "detail": "import_data",
+        "documentation": {}
+    }
+]
