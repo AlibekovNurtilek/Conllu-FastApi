@@ -6,7 +6,6 @@ from app.routers.sentences import router as sentence_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    #await delete_tables()
     await create_tables()
     print("База готова")
     await start_import_data()
