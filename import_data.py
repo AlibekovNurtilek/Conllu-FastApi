@@ -43,6 +43,5 @@ async def load_conllu_to_db(file_path: str, session: AsyncSession):
 
 async def start_import_data():
     async with new_session() as session:
-        await load_conllu_to_db("data/ky_ktmu-ud-test.conllu", session)
-        await load_conllu_to_db("data/ky_ktmu-ud-train.conllu", session)
+        await load_conllu_to_db("data/mydata.conllu", session)
 

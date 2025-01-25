@@ -60,7 +60,7 @@ async def update_sentence_by_id(
     sentence_id: int, 
     updated_sentence: SentenceUpdate, 
     updated_tokens: list[TokenUpdate]
-):
+):  
     async with new_session() as session:
         # Получаем предложение по ID
         result = await session.execute(
@@ -83,7 +83,8 @@ async def update_sentence_by_id(
                 token.lemma = token_data.lemma if token_data.lemma else token.lemma
                 token.pos = token_data.pos if token_data.pos else token.pos
                 token.xpos = token_data.xpos if token_data.xpos else token.xpos
-                token.feats = token_data.feats if token_data.feats else token.feats
+                if token_data.feats is not None:
+                    token.feats = token_data.feats
                 token.head = token_data.head if token_data.head is not None else token.head
                 token.deprel = token_data.deprel if token_data.deprel else token.deprel
                 token.misc = token_data.misc if token_data.misc else token.misc
