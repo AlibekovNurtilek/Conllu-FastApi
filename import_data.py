@@ -59,10 +59,9 @@ async def check_data_exists(session: AsyncSession) -> bool:
 
 async def start_import_data():
     async with new_session() as session:
-        # Проверяем, есть ли данные в таблицах
         if await check_data_exists(session):
             print("Data already exists in the database. Skipping import.")
             return
-        await load_conllu_to_db("data/ky_ktmu-ud-test.conllu", session)
-        await load_conllu_to_db("data/ky_ktmu-ud-train.conllu", session)
+        await load_conllu_to_db("data/mydata.conllu", session)
+
 

@@ -280,6 +280,14 @@
         "documentation": {}
     },
     {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
         "label": "Column",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
@@ -401,7 +409,16 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "app = FastAPI(lifespan=lifespan)\napp.include_router(sentence_router)",
+        "peekOfCode": "app = FastAPI(lifespan=lifespan)\n# Разрешённые источники (указывай фронтенд URL)\norigins = [\n    \"http://localhost:5174\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки",
+        "detail": "app.main",
+        "documentation": {}
+    },
+    {
+        "label": "origins",
+        "kind": 5,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "origins = [\n    \"http://localhost:5174\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки\n    allow_methods=[\"*\"],    # Разрешить все HTTP-методы (GET, POST, PUT, DELETE и т.д.)\n    allow_headers=[\"*\"],    # Разрешить все заголовки",
         "detail": "app.main",
         "documentation": {}
     },
