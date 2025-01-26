@@ -8,8 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    #await delete_tables()
-    #await create_tables()
+
+    await create_tables()
     print("База готова")
     #await start_import_data()
     yield
