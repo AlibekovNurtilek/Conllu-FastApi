@@ -27,6 +27,15 @@ async def load_conllu_to_db(file_path: str, session: AsyncSession):
         await session.flush()  # Получаем ID для предложения
 
         for token in sent:
+            # Получаем индекс токена
+            # Пример кода для обработки диапазона, если он есть
+            token_index = str(token["id"])
+
+            # Если индексы представляют диапазон (например, "3-5")
+            if isinstance(token["id"], tuple) and len(token["id"]) == 3:
+                token_index = f"{token['id'][0]}-{token['id'][2]}"  # Преобразуем в строку диапазона, например, "3-5"
+
+
             db_token = Token(
                 form=token["form"],
                 lemma=token.get("lemma"),
@@ -36,7 +45,8 @@ async def load_conllu_to_db(file_path: str, session: AsyncSession):
                 deprel=token.get("deprel"),
                 misc=str(token.get("misc", {})),
                 feats=token.get("feats"),
-                sentence_id=db_sentence.id
+                sentence_id=db_sentence.id,
+                token_index=token_index  # Устанавливаем индекс
             )
             session.add(db_token)
 

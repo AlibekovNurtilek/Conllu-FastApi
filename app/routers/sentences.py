@@ -43,13 +43,19 @@ async def get_sentences(
 ):
     return await get_paginated_sentences( page, size)
 
+
 @router.get("/sentences/{sentence_id}", response_model=SentenceWithTokens)
 async def get_sentence_by_id(sentence_id: int):
     async with new_session() as session:
         # Получаем предложение с токенами по ID
-        result = await session.execute(select(Sentence).where(Sentence.id == sentence_id).options(selectinload(Sentence.tokens)))
+        result = await session.execute(
+            select(Sentence)
+            .where(Sentence.id == sentence_id)
+            .options(
+                selectinload(Sentence.tokens)
+            )
+        )
         sentence = result.scalars().first()
-
         if not sentence:
             raise HTTPException(status_code=404, detail="Sentence not found")
 
@@ -74,11 +80,20 @@ async def update_sentence_by_id(
         # Обновляем данные предложения
         sentence.text = updated_sentence.text if updated_sentence.text else sentence.text
         sentence.is_corrected = 1
+        
+        # Сохраняем список id токенов, которые должны остаться
+        updated_token_ids = [token_data.id for token_data in updated_tokens if token_data.id]
 
-        # Обновляем токены
+        # Удаляем токены, которых нет в списке обновленных токенов
+        tokens_to_delete = [token for token in sentence.tokens if token.id not in updated_token_ids]
+        for token in tokens_to_delete:
+            sentence.tokens.remove(token)
+        
+        # Обновляем или добавляем новые токены
         for token_data in updated_tokens:
             token = next((t for t in sentence.tokens if t.id == token_data.id), None)
             if token:
+                # Обновляем существующие токены
                 token.form = token_data.form if token_data.form else token.form
                 token.lemma = token_data.lemma if token_data.lemma else token.lemma
                 token.pos = token_data.pos if token_data.pos else token.pos
@@ -97,6 +112,7 @@ async def update_sentence_by_id(
         await session.commit()
 
         return {"message": "Sentence and tokens updated successfully"}
+
 
 @router.post("/sentences", response_model=SentenceResponse)
 async def create_sentence(

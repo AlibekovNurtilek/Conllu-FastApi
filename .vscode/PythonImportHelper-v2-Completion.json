@@ -409,7 +409,7 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "app = FastAPI(lifespan=lifespan)\n# Разрешённые источники (указывай фронтенд URL)\norigins = [\n    \"http://localhost:5174\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки",
+        "peekOfCode": "app = FastAPI(lifespan=lifespan)\n# Разрешённые источники (указывай фронтенд URL)\norigins = [\n    \"http://localhost:5173\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки",
         "detail": "app.main",
         "documentation": {}
     },
@@ -418,7 +418,7 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "origins = [\n    \"http://localhost:5174\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки\n    allow_methods=[\"*\"],    # Разрешить все HTTP-методы (GET, POST, PUT, DELETE и т.д.)\n    allow_headers=[\"*\"],    # Разрешить все заголовки",
+        "peekOfCode": "origins = [\n    \"http://localhost:5173\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки\n    allow_methods=[\"*\"],    # Разрешить все HTTP-методы (GET, POST, PUT, DELETE и т.д.)\n    allow_headers=[\"*\"],    # Разрешить все заголовки",
         "detail": "app.main",
         "documentation": {}
     },
@@ -427,7 +427,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Sentence(Base):\n    __tablename__ = 'sentences'\n    id = Column(Integer, primary_key=True, index=True)\n    text = Column(String, index=True)  # Текст предложения\n    is_corrected = Column(Integer, default=0)  # 0 - не исправлено, 1 - исправлено\n    tokens = relationship(\"Token\", back_populates=\"sentence\")\nclass Token(Base):\n    __tablename__ = 'tokens'\n    id = Column(Integer, primary_key=True, index=True)\n    form = Column(String, index=True)  # Форма токена (например, слово)",
+        "peekOfCode": "class Sentence(Base):\n    __tablename__ = 'sentences'\n    id = Column(Integer, primary_key=True, index=True)\n    text = Column(String, index=True)  # Текст предложения\n    is_corrected = Column(Integer, default=0)  # 0 - не исправлено, 1 - исправлено\n    tokens = relationship(\"Token\", back_populates=\"sentence\")\nclass Token(Base):\n    __tablename__ = 'tokens'\n    id = Column(Integer, primary_key=True, index=True)\n    # Новое поле для хранения индекса токена в предложении, поддерживает диапазоны",
         "detail": "app.models",
         "documentation": {}
     },
@@ -436,7 +436,7 @@
         "kind": 6,
         "importPath": "app.models",
         "description": "app.models",
-        "peekOfCode": "class Token(Base):\n    __tablename__ = 'tokens'\n    id = Column(Integer, primary_key=True, index=True)\n    form = Column(String, index=True)  # Форма токена (например, слово)\n    lemma = Column(String)  # Лемма токена\n    pos = Column(String)  # Часть речи\n    xpos = Column(String)  # Точная часть речи\n    feats = Column(JSON)  # Характеристики токена (например, морфологические признаки)\n    head = Column(Integer, ForeignKey(\"tokens.id\"))  # Ссылка на головной токен (ID)\n    deprel = Column(String)  # Тип зависимости",
+        "peekOfCode": "class Token(Base):\n    __tablename__ = 'tokens'\n    id = Column(Integer, primary_key=True, index=True)\n    # Новое поле для хранения индекса токена в предложении, поддерживает диапазоны\n    token_index = Column(String, index=True)  # Индекс токена в предложении (например, \"3-5\" или \"1\")\n    form = Column(String, index=True)  # Форма токена (например, слово)\n    lemma = Column(String)  # Лемма токена\n    pos = Column(String)  # Часть речи\n    xpos = Column(String)  # Точная часть речи\n    feats = Column(JSON)  # Характеристики токена (например, морфологические признаки)",
         "detail": "app.models",
         "documentation": {}
     },
@@ -454,7 +454,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class PaginatedResponse(BaseModel):\n    total: int\n    pages: int\n    page: int\n    size: int\n    items: List[SentenceResponse]\n#для получания предложения с токенами\nclass TokenBase(BaseModel):\n    id: int\n    form: str",
+        "peekOfCode": "class PaginatedResponse(BaseModel):\n    total: int\n    pages: int\n    page: int\n    size: int\n    items: List[SentenceResponse]\n#для получания предложения с токенами\nclass TokenBase(BaseModel):\n    id: int\n    token_index: Optional[str]",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -463,7 +463,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class TokenBase(BaseModel):\n    id: int\n    form: str\n    lemma: Optional[str] = None\n    pos: Optional[str] = None\n    xpos: Optional[str] = None\n    feats: Optional[dict] = None\n    head: Optional[int] = None\n    deprel: Optional[str] = None\n    misc: Optional[str] = None",
+        "peekOfCode": "class TokenBase(BaseModel):\n    id: int\n    token_index: Optional[str]\n    form: str\n    lemma: Optional[str] = None\n    pos: Optional[str] = None\n    xpos: Optional[str] = None\n    feats: Optional[dict] = None\n    head: Optional[int] = None\n    deprel: Optional[str] = None",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -472,7 +472,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class SentenceWithTokens(BaseModel):\n    id: int\n    text: str\n    is_corrected: int\n    tokens: List[TokenBase]\n    class Config:\n        orm_mode = True\nclass TokenUpdate(BaseModel):\n    id: int\n    form: Optional[str]",
+        "peekOfCode": "class SentenceWithTokens(BaseModel):\n    id: int\n    text: str\n    is_corrected: int\n    tokens: List[TokenBase]\n    class Config:\n        orm_mode = True\nclass TokenUpdate(BaseModel):\n    id: Optional[int] = None\n    form: Optional[str]",
         "detail": "app.schemas",
         "documentation": {}
     },
@@ -481,7 +481,7 @@
         "kind": 6,
         "importPath": "app.schemas",
         "description": "app.schemas",
-        "peekOfCode": "class TokenUpdate(BaseModel):\n    id: int\n    form: Optional[str]\n    lemma: Optional[str]\n    pos: Optional[str]\n    xpos: Optional[str]\n    feats: Optional[dict]\n    head: Optional[int]\n    deprel: Optional[str]\n    misc: Optional[str]",
+        "peekOfCode": "class TokenUpdate(BaseModel):\n    id: Optional[int] = None\n    form: Optional[str]\n    lemma: Optional[str]\n    pos: Optional[str]\n    xpos: Optional[str]\n    feats: Optional[dict]\n    head: Optional[int]\n    deprel: Optional[str]\n    misc: Optional[str]",
         "detail": "app.schemas",
         "documentation": {}
     },

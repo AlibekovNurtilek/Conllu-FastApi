@@ -18,6 +18,8 @@ class Token(Base):
     __tablename__ = 'tokens'
 
     id = Column(Integer, primary_key=True, index=True)
+    # Новое поле для хранения индекса токена в предложении, поддерживает диапазоны
+    token_index = Column(String, index=True)  # Индекс токена в предложении (например, "3-5" или "1")
     form = Column(String, index=True)  # Форма токена (например, слово)
     lemma = Column(String)  # Лемма токена
     pos = Column(String)  # Часть речи
@@ -28,6 +30,7 @@ class Token(Base):
     misc = Column(String)  # Дополнительные комментарии
     sentence_id = Column(Integer, ForeignKey("sentences.id"))
     sentence = relationship("Sentence", back_populates="tokens")
+    
 
     head_token = relationship("Token", remote_side=[id])
 

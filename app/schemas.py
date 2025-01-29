@@ -21,6 +21,7 @@ class PaginatedResponse(BaseModel):
 #для получания предложения с токенами
 class TokenBase(BaseModel):
     id: int
+    token_index: Optional[str]
     form: str
     lemma: Optional[str] = None
     pos: Optional[str] = None
@@ -29,6 +30,7 @@ class TokenBase(BaseModel):
     head: Optional[int] = None
     deprel: Optional[str] = None
     misc: Optional[str] = None
+    
 
     class Config:
         orm_mode = True
@@ -46,7 +48,7 @@ class SentenceWithTokens(BaseModel):
 
 
 class TokenUpdate(BaseModel):
-    id: int
+    id: Optional[int] = None
     form: Optional[str]
     lemma: Optional[str]
     pos: Optional[str]
@@ -55,6 +57,8 @@ class TokenUpdate(BaseModel):
     head: Optional[int]
     deprel: Optional[str]
     misc: Optional[str]
+    token_index: Optional[str]
+    
 
 class SentenceUpdate(BaseModel):
     text: Optional[str]
