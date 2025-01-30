@@ -18,7 +18,7 @@ app = FastAPI(lifespan=lifespan)
 
 # Разрешённые источники (указывай фронтенд URL)
 origins = [
-    "http://localhost:5173",  # Vite React фронтенд
+    "http://localhost:5174",  # Vite React фронтенд
     "https://conllu-editor.vercel.app",   # Альтернативный локальный адрес
 ]
 

@@ -145,3 +145,29 @@ async def create_sentence(
         
         # Возвращаем созданное предложение
         return {"id": new_sentence.id, "text": new_sentence.text}
+    
+
+
+
+@router.get("/tokens/clean_person_in_feats")
+async def clean_person_in_feats():
+    async with new_session() as session:
+        # Получаем все токены, где pos == NOUN, PROPN, PRON
+        result = await session.execute(
+            select(Token).where(Token.pos.in_(['NOUN', 'PROPN', 'PRON']))
+        )
+        tokens = result.scalars().all()
+
+        if not tokens:
+            raise HTTPException(status_code=404, detail="No tokens found with the specified POS")
+
+        # Обрабатываем каждый токен
+        for token in tokens:
+            if token.feats and "Person" in token.feats:
+
+                token.feats = {key: value for key, value in token.feats.items() if key != "Person"}
+                session.add(token)
+
+        await session.flush()       
+        await session.commit()
+        return {"message": "Person field removed from feats for relevant tokens"}
