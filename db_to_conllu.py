@@ -1,0 +1,72 @@
+import logging
+import json
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
+from sqlalchemy.future import select
+from sqlalchemy.orm import selectinload
+from app.models import Sentence, Token
+import asyncio
+
+# Создаем асинхронный движок и сессию
+DATABASE_URL = "sqlite+aiosqlite:///data/database.db"
+engine = create_async_engine(DATABASE_URL, echo=False)
+new_session = async_sessionmaker(engine, expire_on_commit=False)
+
+async def convert_to_conllu(session: AsyncSession, output_file: str):
+    async with session.begin():
+        result = await session.execute(select(Sentence).options(selectinload(Sentence.tokens)))
+        sentences = result.scalars().all()
+
+    conllu_lines = []
+    for sentence in sentences:
+        conllu_lines.append(f"# sent_id = {sentence.id}")
+        conllu_lines.append(f"# text = {sentence.text}")
+        
+        tokens = sorted(sentence.tokens, key=lambda t: tuple(map(int, t.token_index.split('-'))) if '-' in t.token_index else (int(t.token_index),))
+        for token in tokens:
+            upos_fixed = await fix_upos(token.pos)
+            xpos_fixed = await fix_xpos(token.pos, token.xpos)
+            feats_formatted = await format_feats(token.feats)
+            
+            conllu_lines.append(
+                f"{token.token_index}\t{token.form}\t{token.lemma}\t{upos_fixed}\t"
+                f"{xpos_fixed}\t{feats_formatted}\t{token.head if token.head is not None else 0}\t"
+                f"{token.deprel if token.deprel is not None else '_'}\t_\t{token.misc if token.misc is not None else '_'}"
+            )
+        
+        conllu_lines.append("")  # Пустая строка между предложениями
+    
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write("\n".join(conllu_lines))
+    
+    print(f"Data successfully exported to {output_file}!")
+
+async def fix_upos(upos):
+    """Если тег кастомный, заменяем UPOS на X."""
+    if upos is None:
+        return "_"
+    custom_tags = {"ttsoz", "etsoz", "issoz", "assoz", "ttsssoz", "atooch", "ktooch"}
+    return "X" if upos.lower() in custom_tags else upos.upper()
+
+async def fix_xpos(upos, xpos):
+    """Приводим XPOS к нижнему регистру. Если UPOS стандартный, копируем его в XPOS."""
+    if xpos is None or xpos == "_":
+        return upos.lower() if upos and upos != "X" else "_"
+    return xpos.lower()
+
+async def format_feats(feats):
+    """Преобразование FEATS из JSON в строку формата CoNLL-U."""
+    if not feats or feats == "_":
+        return "_"
+    
+    if isinstance(feats, str):
+        feats = json.loads(feats)
+    
+    formatted_feats = [f"{key}={value}" for key, value in feats.items()]
+    return "|".join(formatted_feats) if formatted_feats else "_"
+
+async def start_export_data():
+    async with new_session() as session:
+        await convert_to_conllu(session, "data/output.conllu")
+
+if __name__ == "__main__":
+    asyncio.run(start_export_data())

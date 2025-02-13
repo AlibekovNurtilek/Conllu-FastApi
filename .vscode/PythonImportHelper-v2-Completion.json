@@ -88,6 +88,38 @@
         "documentation": {}
     },
     {
+        "label": "AsyncSession",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "create_async_engine",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "async_sessionmaker",
+        "importPath": "sqlalchemy.ext.asyncio",
+        "description": "sqlalchemy.ext.asyncio",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.ext.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "select",
+        "importPath": "sqlalchemy.future",
+        "description": "sqlalchemy.future",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.future",
+        "documentation": {}
+    },
+    {
         "label": "select",
         "importPath": "sqlalchemy.future",
         "description": "sqlalchemy.future",
@@ -136,11 +168,35 @@
         "documentation": {}
     },
     {
+        "label": "selectinload",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
         "label": "declarative_base",
         "importPath": "sqlalchemy.orm",
         "description": "sqlalchemy.orm",
         "isExtraImport": true,
         "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "Sentence",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
+        "documentation": {}
+    },
+    {
+        "label": "Token",
+        "importPath": "app.models",
+        "description": "app.models",
+        "isExtraImport": true,
+        "detail": "app.models",
         "documentation": {}
     },
     {
@@ -361,6 +417,24 @@
         "documentation": {}
     },
     {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
         "label": "parse",
         "importPath": "conllu",
         "description": "conllu",
@@ -409,7 +483,7 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "app = FastAPI(lifespan=lifespan)\n# Разрешённые источники (указывай фронтенд URL)\norigins = [\n    \"http://localhost:5174\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки",
+        "peekOfCode": "app = FastAPI(lifespan=lifespan)\n# Разрешённые источники (указывай фронтенд URL)\norigins = [\n    \"http://localhost:5173\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки",
         "detail": "app.main",
         "documentation": {}
     },
@@ -418,7 +492,7 @@
         "kind": 5,
         "importPath": "app.main",
         "description": "app.main",
-        "peekOfCode": "origins = [\n    \"http://localhost:5174\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки\n    allow_methods=[\"*\"],    # Разрешить все HTTP-методы (GET, POST, PUT, DELETE и т.д.)\n    allow_headers=[\"*\"],    # Разрешить все заголовки",
+        "peekOfCode": "origins = [\n    \"http://localhost:5173\",  # Vite React фронтенд\n    \"https://conllu-editor.vercel.app\",   # Альтернативный локальный адрес\n]\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=origins,  # Разрешённые источники\n    allow_credentials=True, # Разрешение отправки куки\n    allow_methods=[\"*\"],    # Разрешить все HTTP-методы (GET, POST, PUT, DELETE и т.д.)\n    allow_headers=[\"*\"],    # Разрешить все заголовки",
         "detail": "app.main",
         "documentation": {}
     },
@@ -519,6 +593,33 @@
         "description": "app.schemas",
         "peekOfCode": "class SentenceResponse(BaseModel):\n    id: int\n    text: str\n    class Config:\n        orm_mode = True",
         "detail": "app.schemas",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_URL",
+        "kind": 5,
+        "importPath": "db_to_conllu",
+        "description": "db_to_conllu",
+        "peekOfCode": "DATABASE_URL = \"sqlite+aiosqlite:///data/database.db\"\nengine = create_async_engine(DATABASE_URL, echo=False)\nnew_session = async_sessionmaker(engine, expire_on_commit=False)\nasync def convert_to_conllu(session: AsyncSession, output_file: str):\n    async with session.begin():\n        result = await session.execute(select(Sentence).options(selectinload(Sentence.tokens)))\n        sentences = result.scalars().all()\n    conllu_lines = []\n    for sentence in sentences:\n        conllu_lines.append(f\"# sent_id = {sentence.id}\")",
+        "detail": "db_to_conllu",
+        "documentation": {}
+    },
+    {
+        "label": "engine",
+        "kind": 5,
+        "importPath": "db_to_conllu",
+        "description": "db_to_conllu",
+        "peekOfCode": "engine = create_async_engine(DATABASE_URL, echo=False)\nnew_session = async_sessionmaker(engine, expire_on_commit=False)\nasync def convert_to_conllu(session: AsyncSession, output_file: str):\n    async with session.begin():\n        result = await session.execute(select(Sentence).options(selectinload(Sentence.tokens)))\n        sentences = result.scalars().all()\n    conllu_lines = []\n    for sentence in sentences:\n        conllu_lines.append(f\"# sent_id = {sentence.id}\")\n        conllu_lines.append(f\"# text = {sentence.text}\")",
+        "detail": "db_to_conllu",
+        "documentation": {}
+    },
+    {
+        "label": "new_session",
+        "kind": 5,
+        "importPath": "db_to_conllu",
+        "description": "db_to_conllu",
+        "peekOfCode": "new_session = async_sessionmaker(engine, expire_on_commit=False)\nasync def convert_to_conllu(session: AsyncSession, output_file: str):\n    async with session.begin():\n        result = await session.execute(select(Sentence).options(selectinload(Sentence.tokens)))\n        sentences = result.scalars().all()\n    conllu_lines = []\n    for sentence in sentences:\n        conllu_lines.append(f\"# sent_id = {sentence.id}\")\n        conllu_lines.append(f\"# text = {sentence.text}\")\n        tokens = sorted(sentence.tokens, key=lambda t: tuple(map(int, t.token_index.split('-'))) if '-' in t.token_index else (int(t.token_index),))",
+        "detail": "db_to_conllu",
         "documentation": {}
     },
     {
