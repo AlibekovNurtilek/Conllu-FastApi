@@ -21,17 +21,18 @@ async def convert_to_conllu(session: AsyncSession, output_file: str):
         conllu_lines.append(f"# sent_id = {sentence.id}")
         conllu_lines.append(f"# text = {sentence.text}")
         
-        tokens = sorted(sentence.tokens, key=lambda t: tuple(map(int, t.token_index.split('-'))) if '-' in t.token_index else (int(t.token_index),))
-        for token in tokens:
-            upos_fixed = await fix_upos(token.pos)
-            xpos_fixed = await fix_xpos(token.pos, token.xpos)
-            feats_formatted = await format_feats(token.feats)
-            
-            conllu_lines.append(
-                f"{token.token_index}\t{token.form}\t{token.lemma}\t{upos_fixed}\t"
-                f"{xpos_fixed}\t{feats_formatted}\t{token.head if token.head is not None else 0}\t"
-                f"{token.deprel if token.deprel is not None else '_'}\t_\t{token.misc if token.misc is not None else '_'}"
-            )
+        tokens = sentence.tokens
+        
+        def token_sort_key(token):
+            if "-" in token.token_index:
+                start, end = map(int, token.token_index.split("-"))
+                return (start - 1, start + 0.5)  # Ставим MWT между x-1 и x
+            return (int(token.token_index),)
+        
+        sorted_tokens = sorted(tokens, key=token_sort_key)
+        
+        for token in sorted_tokens:
+            conllu_lines.append(await format_token_line(token))
         
         conllu_lines.append("")  # Пустая строка между предложениями
     
@@ -39,6 +40,17 @@ async def convert_to_conllu(session: AsyncSession, output_file: str):
         f.write("\n".join(conllu_lines))
     
     print(f"Data successfully exported to {output_file}!")
+
+async def format_token_line(token):
+    """Форматирует строку для CoNLL-U."""
+    upos_fixed = await fix_upos(token.pos)
+    xpos_fixed = await fix_xpos(token.pos, token.xpos)
+    feats_formatted = await format_feats(token.feats)
+    return (
+        f"{token.token_index}\t{token.form}\t{token.lemma}\t{upos_fixed}\t"
+        f"{xpos_fixed}\t{feats_formatted}\t{token.head if token.head is not None else 0}\t"
+        f"{token.deprel if token.deprel is not None else '_'}\t_\t{token.misc if token.misc is not None else '_'}"
+    )
 
 async def fix_upos(upos):
     """Если тег кастомный, заменяем UPOS на X."""
@@ -49,9 +61,10 @@ async def fix_upos(upos):
 
 async def fix_xpos(upos, xpos):
     """Приводим XPOS к нижнему регистру. Если UPOS стандартный, копируем его в XPOS."""
-    if xpos is None or xpos == "_":
-        return upos.lower() if upos and upos != "X" else "_"
-    return xpos.lower()
+    standard_upos_tags = {"NOUN", "PROPN", "ADJ", "PRON", "NUM", "VERB", "AUX", "ADV", "CCONJ", "SCONJ", "PART", "INTJ", "ADP", "DET", "PUNCT", "SYM"}
+    if upos in standard_upos_tags:
+        return upos.lower()
+    return xpos.lower() if xpos else "_"
 
 async def format_feats(feats):
     """Преобразование FEATS из JSON в строку формата CoNLL-U."""
