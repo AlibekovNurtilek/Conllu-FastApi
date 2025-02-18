@@ -1,4 +1,3 @@
-import logging
 from conllu import parse
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models import Sentence, Token

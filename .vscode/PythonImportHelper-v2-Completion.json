@@ -408,6 +408,15 @@
         "documentation": {}
     },
     {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
         "label": "logging",
         "kind": 6,
         "isExtraImport": true,
@@ -596,6 +605,60 @@
         "documentation": {}
     },
     {
+        "label": "isHead",
+        "kind": 2,
+        "importPath": "clearconllu",
+        "description": "clearconllu",
+        "peekOfCode": "def isHead(token: str) -> bool:\n    \"\"\" Проверяет, является ли токен допустимым значением HEAD в CoNLL-U. \"\"\"\n    return token.isdigit() and int(token) >= 0\ndef isDeprel(token: str) -> bool:\n    \"\"\" Проверяет, является ли токен допустимым значением DEPREL в CoNLL-U. \"\"\"\n    VALID_DEPREL = {\n        \"root\", \"nsubj\", \"obj\", \"iobj\", \"csubj\", \"ccomp\", \"xcomp\", \"advcl\", \"obl\",\n        \"vocative\", \"discourse\", \"conj\", \"cc\", \"case\", \"det\", \"amod\", \"nmod\",\n        \"appos\", \"nummod\", \"acl\", \"compound\", \"punct\", 'cop', 'aux', 'parataxis', \"punct\", \"det\"\n    }",
+        "detail": "clearconllu",
+        "documentation": {}
+    },
+    {
+        "label": "isDeprel",
+        "kind": 2,
+        "importPath": "clearconllu",
+        "description": "clearconllu",
+        "peekOfCode": "def isDeprel(token: str) -> bool:\n    \"\"\" Проверяет, является ли токен допустимым значением DEPREL в CoNLL-U. \"\"\"\n    VALID_DEPREL = {\n        \"root\", \"nsubj\", \"obj\", \"iobj\", \"csubj\", \"ccomp\", \"xcomp\", \"advcl\", \"obl\",\n        \"vocative\", \"discourse\", \"conj\", \"cc\", \"case\", \"det\", \"amod\", \"nmod\",\n        \"appos\", \"nummod\", \"acl\", \"compound\", \"punct\", 'cop', 'aux', 'parataxis', \"punct\", \"det\"\n    }\n    return token in VALID_DEPREL\ndef fix_conllu_line(line):\n    # Разделяем строку на колонки по табуляции",
+        "detail": "clearconllu",
+        "documentation": {}
+    },
+    {
+        "label": "fix_conllu_line",
+        "kind": 2,
+        "importPath": "clearconllu",
+        "description": "clearconllu",
+        "peekOfCode": "def fix_conllu_line(line):\n    # Разделяем строку на колонки по табуляции\n    #columns = re.split(r'\\s+', line.strip())  # Разделение по пробелам и табуляциям\n    columns = line.strip().split(\"\\t\")\n    try:\n        if len(columns) < 10:\n            columns += [\"_\"] * (10 - len(columns))\n        # Если строка имеет больше 10 колонок, удаляем лишние\n        if len(columns) > 10:\n            # Перед удалением лишних колонок проверяем, если значение не равно \"_\", выводим sent_id",
+        "detail": "clearconllu",
+        "documentation": {}
+    },
+    {
+        "label": "correct_conllu_file",
+        "kind": 2,
+        "importPath": "clearconllu",
+        "description": "clearconllu",
+        "peekOfCode": "def correct_conllu_file(input_file_path, output_file_path):\n    with open(input_file_path, \"r\", encoding=\"utf-8\") as f:\n        lines = f.readlines()\n    corrected_lines = []\n    for line in lines:\n        # Пропускаем комментарии и пустые строки\n        if line.startswith(\"#\") or not line.strip():\n            corrected_lines.append(line.strip())\n        else:\n            corrected_line = fix_conllu_line(line)",
+        "detail": "clearconllu",
+        "documentation": {}
+    },
+    {
+        "label": "input_file",
+        "kind": 5,
+        "importPath": "clearconllu",
+        "description": "clearconllu",
+        "peekOfCode": "input_file = \"data/mydata_corrected_3.conllu\"  # Путь к исходному файлу\noutput_file = \"data/mydata_corrected_3.conllu\"  # Путь к исправленному файлу\ncorrect_conllu_file(input_file, output_file)\nprint(\"Файл успешно исправлен!\")",
+        "detail": "clearconllu",
+        "documentation": {}
+    },
+    {
+        "label": "output_file",
+        "kind": 5,
+        "importPath": "clearconllu",
+        "description": "clearconllu",
+        "peekOfCode": "output_file = \"data/mydata_corrected_3.conllu\"  # Путь к исправленному файлу\ncorrect_conllu_file(input_file, output_file)\nprint(\"Файл успешно исправлен!\")",
+        "detail": "clearconllu",
+        "documentation": {}
+    },
+    {
         "label": "DATABASE_URL",
         "kind": 5,
         "importPath": "db_to_conllu",
@@ -618,7 +681,7 @@
         "kind": 5,
         "importPath": "db_to_conllu",
         "description": "db_to_conllu",
-        "peekOfCode": "new_session = async_sessionmaker(engine, expire_on_commit=False)\nasync def convert_to_conllu(session: AsyncSession, output_file: str):\n    async with session.begin():\n        result = await session.execute(select(Sentence).options(selectinload(Sentence.tokens)))\n        sentences = result.scalars().all()\n    conllu_lines = []\n    for sentence in sentences:\n        conllu_lines.append(f\"# sent_id = {sentence.id}\")\n        conllu_lines.append(f\"# text = {sentence.text}\")\n        tokens = sorted(sentence.tokens, key=lambda t: tuple(map(int, t.token_index.split('-'))) if '-' in t.token_index else (int(t.token_index),))",
+        "peekOfCode": "new_session = async_sessionmaker(engine, expire_on_commit=False)\nasync def convert_to_conllu(session: AsyncSession, output_file: str):\n    async with session.begin():\n        result = await session.execute(select(Sentence).options(selectinload(Sentence.tokens)))\n        sentences = result.scalars().all()\n    conllu_lines = []\n    for sentence in sentences:\n        conllu_lines.append(f\"# sent_id = {sentence.id}\")\n        conllu_lines.append(f\"# text = {sentence.text}\")\n        tokens = sentence.tokens",
         "detail": "db_to_conllu",
         "documentation": {}
     },
@@ -638,6 +701,33 @@
         "description": "import_data",
         "peekOfCode": "new_session = async_sessionmaker(engine, expire_on_commit=False)\nasync def load_conllu_to_db(file_path: str, session: AsyncSession):\n    with open(file_path, \"r\", encoding=\"utf-8\") as f:\n        data = f.read()\n    sentences = parse(data)\n    for sent in sentences:\n        sentence_text = \" \".join([token[\"form\"] for token in sent])\n        db_sentence = Sentence(text=sentence_text, is_corrected=0)\n        session.add(db_sentence)\n        await session.flush()  # Получаем ID для предложения",
         "detail": "import_data",
+        "documentation": {}
+    },
+    {
+        "label": "look__line",
+        "kind": 2,
+        "importPath": "lookfile",
+        "description": "lookfile",
+        "peekOfCode": "def look__line(line, metadata):\n    columns = line.strip().split(\"\\t\")\n    if len(columns) < 10:\n        columns += [\"_\"] * (10 - len(columns))\n    if columns[6] == \"punct\":\n        print(columns, metadata)\ndef look_file(input_file_path):\n    with open(input_file_path, \"r\", encoding=\"utf-8\") as f:\n        lines = f.readlines()  \n        metadata = ''",
+        "detail": "lookfile",
+        "documentation": {}
+    },
+    {
+        "label": "look_file",
+        "kind": 2,
+        "importPath": "lookfile",
+        "description": "lookfile",
+        "peekOfCode": "def look_file(input_file_path):\n    with open(input_file_path, \"r\", encoding=\"utf-8\") as f:\n        lines = f.readlines()  \n        metadata = ''\n    for line in lines:\n        if line.startswith(\"#\"):\n            metadata = line\n            continue\n        look__line(line=line, metadata=metadata)\n# Пример использования",
+        "detail": "lookfile",
+        "documentation": {}
+    },
+    {
+        "label": "input_file",
+        "kind": 5,
+        "importPath": "lookfile",
+        "description": "lookfile",
+        "peekOfCode": "input_file = \"data/mydata_corrected_3.conllu\"  # Путь к исходному файлу\nlook_file(input_file)",
+        "detail": "lookfile",
         "documentation": {}
     }
 ]
