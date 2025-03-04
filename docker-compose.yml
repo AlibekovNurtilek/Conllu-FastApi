@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+  fastapi:
+    container_name: fastapi_app  # Удобное имя контейнера
+    build: .
+    ports:
+      - "8000:8000"
+    restart: always
+    volumes:
+      - /home/ubuntu/sqlite_data:/app/data  # База данных сохраняется
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
