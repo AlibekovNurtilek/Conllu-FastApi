@@ -32,5 +32,5 @@ def find_invalid_lines(file_path: str):
         print("✅ Файл полностью валиден, ошибок нет.")
 
 # Запуск проверки
-find_invalid_lines("data/extracted_conllu_fixed.conllu")
+find_invalid_lines("data/mydata.conllu")
  
