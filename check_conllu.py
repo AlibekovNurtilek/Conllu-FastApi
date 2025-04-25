@@ -5,32 +5,46 @@ def find_invalid_lines(file_path: str):
     with open(file_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
-    invalid_lines = []
-    valid_lines = []
-    
-    # Используем tqdm для прогресс-бара
-    for i, line in enumerate(tqdm(lines, desc="Проверка строк", unit="строк"), start=1):  
-        stripped = line.rstrip()  # Убираем пробелы справа
-        
-        if not stripped or stripped.startswith("#"):  
-            valid_lines.append(stripped)
-            continue  
+    invalid_blocks = []
+    block = []
+    block_start_line = 0
+    current_line_number = 0
 
+    for line in tqdm(lines, desc="Проверка предложений", unit="строк"):
+        current_line_number += 1
+        stripped = line.rstrip()
+
+        if not stripped:
+            if block:
+                # Проверим блок
+                try:
+                    parse("\n".join(block))
+                except Exception as e:
+                    invalid_blocks.append((block_start_line, block, str(e)))
+                block = []
+            continue
+
+        if not block:
+            block_start_line = current_line_number
+        block.append(stripped)
+
+    # Проверка последнего блока, если файл не заканчивается пустой строкой
+    if block:
         try:
-            parse("\n".join(valid_lines + [stripped]))  
-            valid_lines.append(stripped)  
+            parse("\n".join(block))
         except Exception as e:
-            invalid_lines.append((i, stripped, str(e)))
+            invalid_blocks.append((block_start_line, block, str(e)))
 
     print("\nАнализ завершён!")
-    
-    if invalid_lines:
-        print("⚠ Найдены некорректные строки в CoNLL-U файле:")
-        for line_num, content, error in invalid_lines:  # Выводим только первые 10 ошибок
-            print(f"Строка {line_num}: {content} → Ошибка: {error}")
+
+    if invalid_blocks:
+        print(f"⚠ Найдено {len(invalid_blocks)} некорректных предложений:")
+        for line_num, block, error in invalid_blocks[:10]:  # показываем только первые 10
+            print(f"\nСтрока {line_num}: Ошибка: {error}")
+            for l in block:
+                print(f"  {l}")
     else:
         print("✅ Файл полностью валиден, ошибок нет.")
 
 # Запуск проверки
 find_invalid_lines("data/mydata.conllu")
- 
