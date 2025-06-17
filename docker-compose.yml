@@ -8,7 +8,7 @@ services:
       - "8000:8000"
     restart: always
     volumes:
-      - /home/ubuntu/Conllu-FastApi/data:/app/data
+      - /home/nurtilek/Conllu-FastApi/data:/app/data
     logging:
       driver: "json-file"
       options:
