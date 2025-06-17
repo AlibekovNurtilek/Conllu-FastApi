@@ -62,16 +62,17 @@
 4	,	,	PUNCT	PUNCT	_	5	punct	_	_
 5	"	"	PUNCT	PUNCT	_	6	punct	_	_
 6	Халал	халал	NOUN	NOUN	Case=Nom|Number=Sing|Poss=No	7	nmod	_	_
-7	сертификаты	сертификат	NOUN	NOUN	Case=Nom|Number=Sing|Poss=No	12	nsubj	_	_
-8	"	"	PUNCT	PUNCT	_	7	punct	_	_
+7	"	"	PUNCT	PUNCT	_	6	punct	_	_
+8	сертификаты	сертификат	NOUN	NOUN	Case=Nom|Number=Sing|Poss=No	12	nsubj	_	_
 9	"	"	PUNCT	PUNCT	_	10	punct	_	_
 10	биринчи	биринчи	ADJ	ADJ	Degree=Pos|Form=B	11	amod	_	_
 11	иретте	ирет	NOUN	NOUN	Case=Loc|Number=Sing|Poss=No	12	obl	_	_
-12	КМДБ	КМДБ	PROPN	PROPN	Case=Nom|Number=Sing	13	nsubj	_	_
-13	тарабынан	тараптар	ADP	ADP	_	14	case	_	_
-14	берилүүсү	бер	KTOOCH	KTOOCH	Case=Nom|Number=Sing|Poss=No	15	xcomp	_	_
-15	керек	керек	AUX	AUX	_	0	root	_	_
-16	.	.	PUNCT	PUNCT	_	15	punct	_	_
+12	"	"	PUNCT	PUNCT	_	6	punct	_	_
+13	КМДБ	КМДБ	PROPN	PROPN	Case=Nom|Number=Sing	13	nsubj	_	_
+14	тарабынан	тараптар	ADP	ADP	_	14	case	_	_
+15	берилүүсү	бер	KTOOCH	KTOOCH	Case=Nom|Number=Sing|Poss=No	15	xcomp	_	_
+16	керек	керек	AUX	AUX	_	0	root	_	_
+17	.	.	PUNCT	PUNCT	_	15	punct	_	_
 
 # sent_id = 7
 #text = Дармен: – Чын экен!
