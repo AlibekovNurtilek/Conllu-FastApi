@@ -24,10 +24,10 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # Разрешённые источники
-    allow_credentials=True, # Разрешение отправки куки
-    allow_methods=["*"],    # Разрешить все HTTP-методы (GET, POST, PUT, DELETE и т.д.)
-    allow_headers=["*"],    # Разрешить все заголовки
+    allow_origins=["http://aitilchi.mooo.com", "https://aitilchi.mooo.com"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(sentence_router)
